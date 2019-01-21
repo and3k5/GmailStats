@@ -30,6 +30,9 @@ namespace GmailStats
 
             [Option('e', "erase-cache", Required = false, HelpText = "erase cache and fetch all new information")]
             public bool EraseCache { get; set; }
+
+            [Option('d', "domain-grouping", Required = false, HelpText = "group email by domain instead of the whole email address")]
+            public bool DomainGrouping { get; set; }
         }
 
         static void Main(string[] args)
@@ -110,6 +113,8 @@ namespace GmailStats
                     email = from.ToLower();
                 }
 
+                if (obj.DomainGrouping)
+                    email = email.Substring(email.IndexOf("@", StringComparison.Ordinal) + 1);
 
                 if (!counts.ContainsKey(email))
                 {
