@@ -27,6 +27,9 @@ namespace GmailStats
 
             [Option('q', "gmail-query", Required = true, HelpText = "gmail filter format query")]
             public string Query { get; set; }
+
+            [Option('e', "erase-cache", Required = false, HelpText = "erase cache and fetch all new information")]
+            public bool EraseCache { get; set; }
         }
 
         static void Main(string[] args)
@@ -53,6 +56,8 @@ namespace GmailStats
 
             Console.WriteLine("Start message fetcher and list fetcher");
             var cache = new GmailCache();
+            if (obj.EraseCache)
+                cache.Erase();
             var fetcher = new MessageDetailFetcher(clientService, cache);
             fetcher.Run();
 

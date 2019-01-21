@@ -11,6 +11,7 @@ namespace GmailStats
         public string Id { get; set; }
         public string From { get; set; }
     }
+
     public class GmailCache
     {
         private const string CollectionName = "MessageFromItem";
@@ -28,7 +29,13 @@ namespace GmailStats
             return coll.FindById(id);
         }
 
+        public void Erase()
+        {
+            if (Database.CollectionExists(CollectionName))
+                Database.DropCollection(CollectionName);
+        }
     }
+
     public class LiteDbDataStore : IDataStore
     {
         private const string DataStoreCollectionName = "DataStore";
