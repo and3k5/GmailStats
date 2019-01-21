@@ -2,7 +2,7 @@
   "profiles": {
     "GmailStats": {
       "commandName": "Project",
-      "commandLineArgs": "-c ../../../client_id.json -q \"category:promotions label:inbox\""
+      "commandLineArgs": "-c ../../../client_id.json -q \"label:inbox\""
     }
   }
 }

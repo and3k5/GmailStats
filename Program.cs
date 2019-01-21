@@ -97,10 +97,19 @@ namespace GmailStats
             foreach (var message in messages)
             {
                 var from = message.From;
-                var lastClose = from.LastIndexOf('>');
-                var lastOpen = from.LastIndexOf('<');
+                string email;
+                if (from.Contains("<") && from.Contains(">"))
+                {
+                    var lastClose = from.LastIndexOf('>');
+                    var lastOpen = from.LastIndexOf('<');
 
-                var email = from.Substring(lastOpen, lastClose - lastOpen).ToLower();
+                    email = from.Substring(lastOpen + 1, lastClose - lastOpen - 1).ToLower();
+                }
+                else
+                {
+                    email = from.ToLower();
+                }
+
 
                 if (!counts.ContainsKey(email))
                 {
